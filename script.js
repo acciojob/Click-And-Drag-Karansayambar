@@ -1,22 +1,25 @@
-// // Your code here.
-// let draggedItem;
+ let isDragging = false;
+  let startX;
+  let scrollLeft;
 
-//   function drag(event) {
-//     draggedItem = event.target;
-//     event.dataTransfer.setData("text", event.target.textContent);
-//   }
+  function startDrag(event) {
+    isDragging = true;
+    startX = event.pageX - document.querySelector('.items').offsetLeft;
+    scrollLeft = document.querySelector('.items').scrollLeft;
+  }
 
-//   function allowDrop(event) {
-//     event.preventDefault();
-//   }
+  function drag(event) {
+    if (!isDragging) return;
+    const x = event.pageX - document.querySelector('.items').offsetLeft;
+    const walk = (x - startX) * 2; // Adjust the multiplier for smoother/faster scrolling
+    document.querySelector('.items').scrollLeft = scrollLeft - walk;
+  }
 
-//   function drop(event) {
-//     event.preventDefault();
-//     const data = event.dataTransfer.getData("text");
-//     const targetItem = document.elementFromPoint(event.clientX, event.clientY);
-    
-//     if (targetItem && targetItem.classList.contains("item")) {
-//       targetItem.insertAdjacentHTML("beforebegin", `<div class="item" draggable="true" ondragstart="drag(event)">${data}</div>`);
-//       draggedItem.remove();
-//     }
-//   }
+  function endDrag() {
+    isDragging = false;
+  }
+
+  function handleItemClick(item) {
+    // Handle click on each item if needed
+    console.log('Clicked on item:', item.textContent);
+  }
