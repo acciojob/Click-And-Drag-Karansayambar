@@ -4,6 +4,7 @@
 
   function startDrag(event) {
     isDragging = true;
+	  
     startX = event.pageX - document.querySelector('.items').offsetLeft;
     scrollLeft = document.querySelector('.items').scrollLeft;
   }
